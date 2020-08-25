@@ -22,7 +22,12 @@ func InitRouter() *gin.Engine {
 
 	v1 := r.Group("/v1")
 	{
-		v1.GET("/list",controller.Paginate)
+		v1.GET("/ts",controller.TangShiPaginate)
+		v1.GET("/sc",controller.SongCiPaginate)
+		v1.GET("/yq",controller.YuanQuPaginate)
+		v1.GET("/ly",controller.LunYuPaginate)
+		v1.GET("/sswj",controller.SiShuWuJingPaginate)
+		v1.GET("/ymy",controller.YouMengYingPaginate)
 	}
 
 	return r
