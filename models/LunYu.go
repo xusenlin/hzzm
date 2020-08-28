@@ -4,6 +4,7 @@ package models
 
 import (
 	"gorm.io/gorm"
+	"hzzm/db"
 	"time"
 )
 
@@ -33,4 +34,8 @@ func (t *LunYu) List(pageNum int, pageSize int, maps interface{}) (*PageResult, 
 	result.List = r
 
 	return result, nil
+}
+func (t *LunYu) Favour(id string) error {
+	return db.Conn.Model(&t).Where("id = ?", id).
+		UpdateColumn("star", gorm.Expr("star + ?", 1)).Error
 }

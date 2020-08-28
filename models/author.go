@@ -1,6 +1,8 @@
 package models
 
 import (
+	"gorm.io/gorm"
+	"hzzm/db"
 	"time"
 )
 
@@ -13,4 +15,8 @@ type Author struct {
 	Star      int        `json:"star"`
 	Desc      string     `json:"desc"`
 	Dynasty   string     `json:"dynasty"`
+}
+func (t *Author) Favour(id string) error {
+	return db.Conn.Model(&t).Where("id = ?", id).
+		UpdateColumn("star", gorm.Expr("star + ?", 1)).Error
 }

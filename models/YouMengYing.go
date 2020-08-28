@@ -3,6 +3,7 @@ package models
 //幽梦影
 import (
 	"gorm.io/gorm"
+	"hzzm/db"
 	"time"
 )
 
@@ -31,4 +32,8 @@ func (t *YouMengYing) List(pageNum int, pageSize int, maps interface{}) (*PageRe
 	result.List = r
 
 	return result, nil
+}
+func (t *YouMengYing) Favour(id string) error {
+	return db.Conn.Model(&t).Where("id = ?", id).
+		UpdateColumn("star", gorm.Expr("star + ?", 1)).Error
 }

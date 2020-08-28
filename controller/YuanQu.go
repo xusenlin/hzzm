@@ -28,3 +28,25 @@ func YuanQuPaginate(c *gin.Context) {
 	})
 
 }
+
+func YuanQuFavour(c *gin.Context) {
+
+	id := c.Query("id")
+
+	err := new(models.YuanQu).Favour(id)
+
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"status": false,
+			"data":   "",
+			"msg":    err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"status": true,
+		"data":   id,
+		"msg":    "点赞成功",
+	})
+
+}
