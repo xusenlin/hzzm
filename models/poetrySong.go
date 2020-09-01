@@ -27,7 +27,14 @@ type TangShi struct {
 func (TangShi) TableName() string {
 	return "tang_shi"
 }
-
+type SongShi struct {
+	//诗
+	BasePoetry
+	Paragraphs string `json:"paragraphs"`
+}
+func (SongShi) TableName() string {
+	return "song_shi"
+}
 type SongCi struct {
 	//宋词
 	BasePoetry
@@ -51,6 +58,19 @@ func (YuanQu) TableName() string {
 func (t *TangShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
 
 	var r []TangShi
+
+	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+
+	if err != nil {
+		return result, err
+	}
+	result.List = r
+
+	return result, nil
+}
+func (t *SongShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+
+	var r []SongShi
 
 	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
 
@@ -89,6 +109,10 @@ func (t *YuanQu) List(pageNum int, pageSize int, maps interface{}) (*PageResult,
 }
 
 func (t *TangShi) Favour(id string) error {
+	return db.Conn.Model(&t).Where("id = ?", id).
+		UpdateColumn("star", gorm.Expr("star + ?", 1)).Error
+}
+func (t *SongShi) Favour(id string) error {
 	return db.Conn.Model(&t).Where("id = ?", id).
 		UpdateColumn("star", gorm.Expr("star + ?", 1)).Error
 }

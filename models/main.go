@@ -15,7 +15,7 @@ type PageResult struct {
 }
 
 func TableMigrate() error {
-	return db.Conn.AutoMigrate(&TangShi{}, &SongCi{}, &YuanQu{}, &SiShuWuJing{}, &LunYu{}, &YouMengYing{})
+	return db.Conn.AutoMigrate(&TangShi{}, &SongCi{}, &SongShi{}, &YuanQu{}, &SiShuWuJing{}, &LunYu{}, &YouMengYing{})
 }
 
 func getPaginateData(t interface{}, pageNum int, pageSize int, maps interface{}, f func(*gorm.DB) error) (*PageResult, error) {

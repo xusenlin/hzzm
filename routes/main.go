@@ -25,6 +25,9 @@ func InitRouter() *gin.Engine {
 		v1.GET("/ts",controller.TangShiPaginate)
 		v1.GET("/ts/favour",controller.TangShiFavour)
 
+		v1.GET("/ss",controller.SongShiPaginate)
+		v1.GET("/ss/favour",controller.SongShiFavour)
+
 		v1.GET("/sc",controller.SongCiPaginate)
 		v1.GET("/sc/favour",controller.SongCiFavour)
 
