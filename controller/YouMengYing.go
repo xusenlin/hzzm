@@ -11,7 +11,7 @@ func YouMengYingPaginate(c *gin.Context) {
 
 	pageNum, pageSize := helper.ParsePageParams(c)
 
-	result, err := new(models.YouMengYing).List(pageNum, pageSize, map[string]string{})
+	result, err := new(models.YouMengYing).List(pageNum, pageSize)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

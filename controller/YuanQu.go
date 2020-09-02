@@ -11,7 +11,7 @@ func YuanQuPaginate(c *gin.Context) {
 
 	pageNum, pageSize := helper.ParsePageParams(c)
 
-	result, err := new(models.YuanQu).List(pageNum, pageSize, map[string]string{})
+	result, err := new(models.YuanQu).List(pageNum, pageSize,c.Query("keyword"))
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{

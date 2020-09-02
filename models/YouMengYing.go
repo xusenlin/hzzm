@@ -20,11 +20,12 @@ type YouMengYing struct {
 func (YouMengYing) TableName() string {
 	return "you_meng_ying"
 }
-func (t *YouMengYing) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *YouMengYing) List(pageNum int, pageSize int) (*PageResult, error) {
 
 	var r []YouMengYing
+	var maps,or map[string]interface{}
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	result, err := getPaginateData(t, pageNum, pageSize,maps,or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err

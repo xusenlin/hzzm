@@ -22,11 +22,12 @@ func (LunYu) TableName() string {
 	return "lun_yu"
 }
 
-func (t *LunYu) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *LunYu) List(pageNum int, pageSize int) (*PageResult, error) {
 
 	var r []LunYu
+	var maps,or map[string]interface{}
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	result, err := getPaginateData(t, pageNum, pageSize, maps,or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err

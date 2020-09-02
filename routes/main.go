@@ -22,6 +22,8 @@ func InitRouter() *gin.Engine {
 
 	v1 := r.Group("/v1")
 	{
+		v1.GET("/author",controller.AuthorDetails)
+
 		v1.GET("/ts",controller.TangShiPaginate)
 		v1.GET("/ts/favour",controller.TangShiFavour)
 

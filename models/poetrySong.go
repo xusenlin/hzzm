@@ -27,14 +27,17 @@ type TangShi struct {
 func (TangShi) TableName() string {
 	return "tang_shi"
 }
+
 type SongShi struct {
 	//诗
 	BasePoetry
 	Paragraphs string `json:"paragraphs"`
 }
+
 func (SongShi) TableName() string {
 	return "song_shi"
 }
+
 type SongCi struct {
 	//宋词
 	BasePoetry
@@ -55,11 +58,17 @@ func (YuanQu) TableName() string {
 	return "yuan_qu"
 }
 
-func (t *TangShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *TangShi) List(pageNum int, pageSize int, keyword string) (*PageResult, error) {
 
 	var r []TangShi
+	var maps,or map[string]interface{}
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	if keyword != ""{
+		maps = map[string]interface{}{"title": keyword}
+		or = map[string]interface{}{"author": keyword}
+	}
+
+	result, err := getPaginateData(t, pageNum, pageSize, maps , or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err
@@ -68,11 +77,18 @@ func (t *TangShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult
 
 	return result, nil
 }
-func (t *SongShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *SongShi) List(pageNum int, pageSize int, keyword string) (*PageResult, error) {
 
 	var r []SongShi
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	var maps,or map[string]interface{}
+
+	if keyword != ""{
+		maps = map[string]interface{}{"title": keyword}
+		or = map[string]interface{}{"author": keyword}
+	}
+
+	result, err := getPaginateData(t, pageNum, pageSize, maps,or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err
@@ -81,11 +97,17 @@ func (t *SongShi) List(pageNum int, pageSize int, maps interface{}) (*PageResult
 
 	return result, nil
 }
-func (t *SongCi) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *SongCi) List(pageNum int, pageSize int, keyword string) (*PageResult, error) {
 
 	var r []SongCi
+	var maps,or map[string]interface{}
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	if keyword != ""{
+		maps = map[string]interface{}{"title": keyword}
+		or = map[string]interface{}{"author": keyword}
+	}
+
+	result, err := getPaginateData(t, pageNum, pageSize, maps,or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err
@@ -94,11 +116,17 @@ func (t *SongCi) List(pageNum int, pageSize int, maps interface{}) (*PageResult,
 
 	return result, nil
 }
-func (t *YuanQu) List(pageNum int, pageSize int, maps interface{}) (*PageResult, error) {
+func (t *YuanQu) List(pageNum int, pageSize int, keyword string) (*PageResult, error) {
 
 	var r []YuanQu
+	var maps,or map[string]interface{}
 
-	result, err := getPaginateData(t, pageNum, pageSize, maps, func(q *gorm.DB) error { return q.Find(&r).Error })
+	if keyword != ""{
+		maps = map[string]interface{}{"title": keyword}
+		or = map[string]interface{}{"author": keyword}
+	}
+
+	result, err := getPaginateData(t, pageNum, pageSize, maps,or, func(q *gorm.DB) error { return q.Find(&r).Error })
 
 	if err != nil {
 		return result, err

@@ -11,7 +11,7 @@ func SiShuWuJingPaginate(c *gin.Context) {
 
 	pageNum, pageSize := helper.ParsePageParams(c)
 
-	result, err := new(models.SiShuWuJing).List(pageNum, pageSize, map[string]string{})
+	result, err := new(models.SiShuWuJing).List(pageNum, pageSize)
 
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{
