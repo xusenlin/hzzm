@@ -23,5 +23,6 @@
 *.sln
 *.sw*
 *.db
-
+*.zip
+*.tar.gz
 chinese-poetry
